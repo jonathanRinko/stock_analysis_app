@@ -18,13 +18,13 @@ where python
 1. Update ticker in run_analysis.py
 
 run_analysis.py:  
-'''python
+```python
     # Analyze a single stock
     ticker = "AAPL"
-'''  
+```   
 
 ### Run the program:  
 python run_analysis.py 
 
-### If you like this repo, please give me a star. 
+## If you like this repo, please give me a star. 
 
