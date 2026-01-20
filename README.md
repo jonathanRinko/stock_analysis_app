@@ -18,10 +18,10 @@ where python
 1. Update ticker in run_analysis.py
 
 run_analysis.py:  
-'''
-### Analyze a single stock
-ticker = "AAPL"
-'''
+'''python
+    # Analyze a single stock
+    ticker = "AAPL"
+'''  
 
 ### Run the program:  
 python run_analysis.py 
