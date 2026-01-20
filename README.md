@@ -26,5 +26,5 @@ run_analysis.py:
 ### Run the program:  
 python run_analysis.py 
 
-## If you like this repo, please give me a star. 
+## <span style="color:#2ea44f">If you like this repo, please give me a star ⭐</span>
 
