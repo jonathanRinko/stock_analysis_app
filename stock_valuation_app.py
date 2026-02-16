@@ -19,7 +19,7 @@ try:
     REPORTLAB_AVAILABLE = True
 except ImportError:
     REPORTLAB_AVAILABLE = False
-    print("⚠️ ReportLab not installed. PDF export will not be available.")
+    print("[WARNING] ReportLab not installed. PDF export will not be available.")
     print("Install with: pip install reportlab")
 
 # For Excel export
@@ -30,7 +30,7 @@ try:
     OPENPYXL_AVAILABLE = True
 except ImportError:
     OPENPYXL_AVAILABLE = False
-    print("⚠️ OpenPyXL not installed. Excel export will not be available.")
+    print("[WARNING] OpenPyXL not installed. Excel export will not be available.")
     print("Install with: pip install openpyxl")
 
 
@@ -59,9 +59,9 @@ class EnhancedStockValuationApp:
             self.balance_sheet = self.stock.balance_sheet
             self.cashflow = self.stock.cashflow
             self.history = self.stock.history(period="5y")
-            print(f"✓ Successfully loaded data for {self.ticker}")
+            print(f"[OK] Successfully loaded data for {self.ticker}")
         except Exception as e:
-            print(f"✗ Error loading data: {e}")
+            print(f"[ERROR] Error loading data: {e}")
     
     def get_key_metrics(self):
         """Extract key financial metrics"""
@@ -141,7 +141,7 @@ class EnhancedStockValuationApp:
                 
                 # If no competitors found, use generic approach
                 if not self.competitors:
-                    print(f"⚠️ No predefined competitors found for {self.ticker}")
+                    print(f"[WARNING] No predefined competitors found for {self.ticker}")
                     self.competitors = []
                     
             except Exception as e:
@@ -365,7 +365,7 @@ class EnhancedStockValuationApp:
         # Save the figure
         chart_path = os.path.join(save_path, f'{self.ticker}_historical_analysis.png')
         plt.savefig(chart_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Chart saved to {chart_path}")
+        print(f"[OK] Chart saved to {chart_path}")
         
         return chart_path
     
@@ -539,7 +539,7 @@ class EnhancedStockValuationApp:
         # Save the figure
         chart_path = os.path.join(save_path, f'{self.ticker}_technical_indicators.png')
         plt.savefig(chart_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Technical indicators chart saved to {chart_path}")
+        print(f"[OK] Technical indicators chart saved to {chart_path}")
         
         return chart_path
     
@@ -724,7 +724,7 @@ class EnhancedStockValuationApp:
         # Save the figure
         chart_path = os.path.join(save_path, f'{self.ticker}_monte_carlo.png')
         plt.savefig(chart_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Monte Carlo chart saved to {chart_path}")
+        print(f"[OK] Monte Carlo chart saved to {chart_path}")
         
         return chart_path
     
@@ -1013,7 +1013,7 @@ class EnhancedStockValuationApp:
         Export comprehensive analysis to Excel
         """
         if not OPENPYXL_AVAILABLE:
-            print("❌ OpenPyXL not installed. Cannot export to Excel.")
+            print("[ERROR] OpenPyXL not installed. Cannot export to Excel.")
             return None
         
         if filename is None:
@@ -1189,11 +1189,11 @@ class EnhancedStockValuationApp:
             
             # Save workbook
             wb.save(filename)
-            print(f"✓ Excel report exported to {filename}")
+            print(f"[OK] Excel report exported to {filename}")
             return filename
             
         except Exception as e:
-            print(f"❌ Error exporting to Excel: {e}")
+            print(f"[ERROR] Error exporting to Excel: {e}")
             return None
     
     def export_to_pdf(self, filename=None, include_charts=True):
@@ -1201,7 +1201,7 @@ class EnhancedStockValuationApp:
         Export comprehensive analysis to PDF
         """
         if not REPORTLAB_AVAILABLE:
-            print("❌ ReportLab not installed. Cannot export to PDF.")
+            print("[ERROR] ReportLab not installed. Cannot export to PDF.")
             return None
         
         if filename is None:
@@ -1374,11 +1374,11 @@ class EnhancedStockValuationApp:
             
             # Build PDF
             doc.build(elements)
-            print(f"✓ PDF report exported to {filename}")
+            print(f"[OK] PDF report exported to {filename}")
             return filename
             
         except Exception as e:
-            print(f"❌ Error exporting to PDF: {e}")
+            print(f"[ERROR] Error exporting to PDF: {e}")
             import traceback
             traceback.print_exc()
             return None
@@ -1391,7 +1391,7 @@ class EnhancedStockValuationApp:
         print(f"{'='*80}\n")
         
         # Key Metrics
-        print("📊 KEY FINANCIAL METRICS")
+        print("*** KEY FINANCIAL METRICS")
         print("-" * 80)
         metrics = self.get_key_metrics()
         for key, value in metrics.items():
@@ -1409,7 +1409,7 @@ class EnhancedStockValuationApp:
                 print(f"{key:.<40} {value}")
         
         # DCF Valuation
-        print(f"\n\n💰 DISCOUNTED CASH FLOW (DCF) VALUATION")
+        print(f"\n\n*** DISCOUNTED CASH FLOW (DCF) VALUATION")
         print("-" * 80)
         dcf = self.dcf_valuation()
         if dcf:
@@ -1423,7 +1423,7 @@ class EnhancedStockValuationApp:
                         print(f"{key:.<40} {value:,.2f}")
         
         # Financial Health Score
-        print(f"\n\n🏥 FINANCIAL HEALTH SCORE")
+        print(f"\n\n*** FINANCIAL HEALTH SCORE")
         print("-" * 80)
         health = self.financial_health_score()
         if health:
@@ -1431,7 +1431,7 @@ class EnhancedStockValuationApp:
                 print(f"{key:.<40} {value}")
         
         # Competitor Analysis
-        print(f"\n\n🔍 COMPETITOR ANALYSIS")
+        print(f"\n\n*** COMPETITOR ANALYSIS")
         print("-" * 80)
         comp_df = self.compare_with_competitors()
         if comp_df is not None:
@@ -1444,7 +1444,7 @@ class EnhancedStockValuationApp:
             print("No competitor data available")
         
         # Historical Analysis
-        print(f"\n\n📈 HISTORICAL PERFORMANCE")
+        print(f"\n\n*** HISTORICAL PERFORMANCE")
         print("-" * 80)
         hist_analysis = self.historical_trend_analysis()
         if hist_analysis:
@@ -1455,7 +1455,7 @@ class EnhancedStockValuationApp:
                     print(f"{key:.<40} {value}")
         
         # Technical Indicators
-        print(f"\n\n📉 TECHNICAL INDICATORS")
+        print(f"\n\n*** TECHNICAL INDICATORS")
         print("-" * 80)
         tech_data = self.calculate_technical_indicators()
         if tech_data:
@@ -1469,7 +1469,7 @@ class EnhancedStockValuationApp:
                         print(f"  {key:.<35} {value}")
         
         # Monte Carlo Simulation
-        print(f"\n\n🎲 MONTE CARLO SIMULATION")
+        print(f"\n\n*** MONTE CARLO SIMULATION")
         print("-" * 80)
         mc_results = self.monte_carlo_simulation()
         if mc_results:
@@ -1483,7 +1483,7 @@ class EnhancedStockValuationApp:
         
         # Generate charts if requested
         if include_charts:
-            print(f"\n\n📊 GENERATING CHARTS...")
+            print(f"\n\n*** GENERATING CHARTS...")
             print("-" * 80)
             self.plot_historical_trends()
             self.plot_technical_indicators()
@@ -1491,12 +1491,12 @@ class EnhancedStockValuationApp:
         
         # Export options
         if export_excel:
-            print(f"\n\n📑 EXPORTING TO EXCEL...")
+            print(f"\n\n*** EXPORTING TO EXCEL...")
             print("-" * 80)
             self.export_to_excel()
         
         if export_pdf:
-            print(f"\n\n📄 EXPORTING TO PDF...")
+            print(f"\n\n*** EXPORTING TO PDF...")
             print("-" * 80)
             self.export_to_pdf(include_charts=include_charts)
         
@@ -1513,12 +1513,12 @@ def main():
     print(" "*20 + "Advanced Quantitative Analysis Tool")
     print("="*80 + "\n")
     print("Features:")
-    print("  ✓ DCF & Multiple Valuation Models")
-    print("  ✓ Competitor Comparison")
-    print("  ✓ Historical Trend Analysis")
-    print("  ✓ Technical Indicators")
-    print("  ✓ Monte Carlo Simulation")
-    print("  ✓ Excel & PDF Export")
+    print("  + DCF & Multiple Valuation Models")
+    print("  + Competitor Comparison")
+    print("  + Historical Trend Analysis")
+    print("  + Technical Indicators")
+    print("  + Monte Carlo Simulation")
+    print("  + Excel & PDF Export")
     print("="*80 + "\n")
     
     while True:
@@ -1534,7 +1534,7 @@ def main():
         
         try:
             # Create valuation instance
-            print(f"\n🔄 Loading data for {ticker}...")
+            print(f"\n*** Loading data for {ticker}...")
             valuation = EnhancedStockValuationApp(ticker)
             
             # Ask for competitor tickers
@@ -1572,12 +1572,12 @@ def main():
                 break
                 
         except KeyboardInterrupt:
-            print("\n\n⚠️  Analysis interrupted by user.")
+            print("\n\n[WARNING] Analysis interrupted by user.")
             print("\nThank you for using the Enhanced Stock Valuation App!")
             break
             
         except Exception as e:
-            print(f"\n❌ Error analyzing {ticker}: {e}")
+            print(f"\n[ERROR] Error analyzing {ticker}: {e}")
             print("Please check the ticker symbol and try again.\n")
             import traceback
             traceback.print_exc()

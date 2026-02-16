@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Stock Analysis App - Generated Output Files
+# Excel reports
+*.xlsx
+
+# PDF reports
+*.pdf
+
+# Generated charts
+charts/
+!charts/.gitkeep
+
+# Backtesting results
+backtest_results/
+
+# Temporary data files
+*.csv
+!requirements.txt

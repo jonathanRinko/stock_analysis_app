@@ -1,11 +1,11 @@
 from stock_valuation_app import EnhancedStockValuationApp
 
 # Analyze a single stock
-ticker = "AAPL"
+ticker = "NVDA"
 app = EnhancedStockValuationApp(ticker)
 
 # Set competitors
-app.get_competitors(['MSFT', 'GOOGL', 'META'])
+app.get_competitors(['AMD', 'TSM', 'AVGO'])
 
 # Generate full report with all features
 app.generate_full_report(

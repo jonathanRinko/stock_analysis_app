@@ -1,0 +1,45 @@
+# Backtesting Configuration
+# Configuration for backtesting trading strategies
+
+# Backtesting Parameters
+backtest:
+  initial_capital: 100000.0  # Starting capital in USD
+  commission: 0.001          # Commission rate (0.1%)
+  slippage: 0.0005           # Slippage rate (0.05%)
+  position_size: 1.0         # Fraction of capital per trade (1.0 = 100%)
+  max_positions: 10          # Maximum number of concurrent positions
+
+# Strategy Parameters
+strategies:
+  # Moving Average Crossover Strategy
+  ma_crossover:
+    fast_period: 10          # Fast moving average period
+    slow_period: 30          # Slow moving average period
+
+  # Add more strategies here as needed
+  # rsi_strategy:
+  #   rsi_period: 14
+  #   overbought: 70
+  #   oversold: 30
+
+# Data Parameters
+data:
+  symbols:                   # Symbols to backtest
+    - AAPL
+    - MSFT
+    - GOOGL
+  start_date: "2020-01-01"   # Backtest start date (YYYY-MM-DD)
+  end_date: "2023-12-31"     # Backtest end date (YYYY-MM-DD)
+  timeframe: "1d"            # Data timeframe (1d, 1h, etc.)
+
+# Performance Analysis
+performance:
+  benchmark: "SPY"           # Benchmark symbol for comparison
+  risk_free_rate: 0.04       # Risk-free rate for Sharpe ratio (4%)
+
+# Output Settings
+output:
+  save_results: true         # Save results to file
+  output_dir: "backtest_results"  # Directory for output files
+  generate_charts: true      # Generate performance charts
+  export_trades: true        # Export trade log to CSV
